@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>كل سنة وانتي طيبة يا نينو 🎂</title>
+<link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg1:#fff0e6;--bg2:#ffd3e4;--ink:#3a1030;--soft:#7a3b62;--card:#ffffffcc;--pink:#ff3d7f;--mango:#ffb02e;--mint:#2ec4a6;--cake:#ff8fb8;--cream:#fff6ea;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg1:#2b0d3a;--bg2:#5a1747;--ink:#fff3e8;--soft:#f3b9d6;--card:#ffffff1c}}
+:root[data-theme="dark"]{--bg1:#2b0d3a;--bg2:#5a1747;--ink:#fff3e8;--soft:#f3b9d6;--card:#ffffff1c}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:'Cairo',Tahoma,sans-serif;color:var(--ink);background:linear-gradient(160deg,var(--bg1),var(--bg2));background-color:var(--bg1);overflow-x:hidden}
+h1,h2,.big{font-family:'Lalezar','Cairo',Tahoma,sans-serif;font-weight:400;margin:0}
+canvas#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:50}
+.balloons{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:1}
+.b{position:absolute;bottom:-120px;width:46px;height:58px;border-radius:50% 50% 48% 48%;opacity:.8;animation:up linear infinite}
+.b::after{content:"";position:absolute;left:50%;top:100%;width:2px;height:40px;background:currentColor;opacity:.4}
+@keyframes up{to{transform:translateY(-120vh) rotate(8deg)}}
+/* lock */
+#lock{position:fixed;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(160deg,var(--bg1),var(--bg2));transition:opacity .8s,transform .8s}
+#lock.gone{opacity:0;transform:scale(1.15);pointer-events:none}
+.box{width:min(420px,100%);text-align:center;background:var(--card);backdrop-filter:blur(8px);border-radius:28px;padding:30px 22px;box-shadow:0 20px 60px #ff3d7f33}
+.box .big{font-size:2.6rem;line-height:1.1}
+.box p{color:var(--soft);margin:10px 0 18px}
+.pw{display:flex;gap:8px}
+input{flex:1;min-width:0;font:inherit;font-size:1.3rem;text-align:center;padding:12px;border-radius:16px;border:2px solid var(--pink);background:var(--cream);color:#3a1030;direction:ltr;letter-spacing:.15em}
+input:focus-visible,button:focus-visible{outline:3px solid var(--mango);outline-offset:2px}
+button{font:inherit;font-weight:800;border:0;border-radius:16px;padding:12px 20px;background:var(--pink);color:#fff;cursor:pointer;transition:transform .15s}
+button:active{transform:scale(.94)}
+#err{min-height:1.6em;margin-top:12px;font-weight:600;color:var(--pink)}
+.shake{animation:sh .4s}
+@keyframes sh{25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}
+/* main */
+main{position:relative;z-index:2;max-width:720px;margin:0 auto;padding:36px 18px 90px;text-align:center}
+.hero h1{font-size:clamp(2.6rem,11vw,4.8rem);line-height:1.1;color:var(--pink)}
+.hero .sub{font-size:1.2rem;color:var(--soft);min-height:2.2em;margin:14px 0 0}
+.date{display:inline-block;margin-top:10px;padding:6px 16px;border-radius:99px;background:var(--mango);color:#3a1030;font-weight:800}
+/* cake */
+.cakewrap{margin:34px auto 10px;width:230px}
+.candles{display:flex;justify-content:center;gap:34px;height:70px;align-items:flex-end}
+.candle{position:relative;width:12px;height:40px;border-radius:4px;background:repeating-linear-gradient(45deg,#fff 0 6px,var(--mint) 6px 12px)}
+.flame{position:absolute;left:50%;bottom:100%;width:16px;height:26px;margin-left:-8px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:radial-gradient(circle at 50% 70%,#fff6a0,#ffb02e 60%,#ff5a1f);animation:fl .25s infinite alternate;transform-origin:50% 100%;transition:opacity .3s,transform .3s}
+.out .flame{opacity:0;transform:scale(.2)}
+@keyframes fl{to{transform:scale(1.1,.92) rotate(3deg)}}
+.tier{height:56px;border-radius:14px 14px 6px 6px;background:var(--cake);position:relative}
+.tier::before{content:"";position:absolute;inset:0 0 auto 0;height:20px;border-radius:14px 14px 40% 40%;background:#fff;opacity:.9}
+.t2{width:230px}.t1{width:170px;margin:0 auto -2px;height:48px;background:#ff6fa4}
+.plate{height:12px;border-radius:99px;background:var(--mango);width:260px;margin:0 -15px}
+#blow{margin-top:18px;font-size:1.1rem}
+#wishmsg{min-height:2.4em;margin-top:12px;font-weight:800;font-size:1.15rem;color:var(--pink)}
+/* cards */
+h2{font-size:2rem;margin:50px 0 6px;color:var(--ink)}
+.hint{color:var(--soft);margin:0 0 18px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.card{perspective:700px;height:150px;cursor:pointer;border:0;background:none;padding:0;font:inherit;color:inherit}
+.in{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+.card.open .in{transform:rotateY(180deg)}
+.f,.k{position:absolute;inset:0;border-radius:22px;display:flex;align-items:center;justify-content:center;padding:14px;backface-visibility:hidden;font-weight:600;line-height:1.6}
+.f{background:var(--pink);color:#fff;font-family:'Lalezar',Cairo,sans-serif;font-size:2.2rem}
+.k{background:var(--card);backdrop-filter:blur(6px);transform:rotateY(180deg);border:2px solid var(--pink)}
+.card:nth-child(2n) .f{background:var(--mango);color:#3a1030}
+.card:nth-child(3n) .f{background:var(--mint);color:#06332a}
+.letter{margin-top:46px;background:var(--card);border-radius:26px;padding:26px 22px;text-align:right;line-height:2;font-size:1.1rem;box-shadow:0 14px 40px #ff3d7f22}
+.letter b{color:var(--pink)}
+#snd{position:fixed;z-index:30;top:calc(env(safe-area-inset-top,0px) + 12px);left:12px;width:48px;height:48px;padding:0;border-radius:50%;font-size:1.4rem;display:none}
+footer{margin-top:40px;color:var(--soft)}
+@media (prefers-reduced-motion:reduce){.b,.flame{animation:none}}
+</style>
+</head>
+<body>
+<canvas id="fx"></canvas>
+
+<div id="lock">
+  <div class="box" id="box">
+    <div class="big">🔐 يا نينو!</div>
+    <p>في مفاجأة مستنياكي جوّا، بس لازم الباس الأول.<br>الباس هو <b>يوم وشهر</b> عيد ميلادك (زي 5/3)</p>
+    <div class="pw">
+      <input id="pw" inputmode="numeric" autocomplete="off" placeholder="--/--" aria-label="الباس">
+      <button id="go">افتحي</button>
+    </div>
+    <div id="err" role="status"></div>
+  </div>
+</div>
+
+<button id="snd" aria-label="تشغيل أو إيقاف الأغنية">🎵</button>
+<div class="balloons" id="bal"></div>
+
+<main id="main" hidden>
+  <section class="hero">
+    <h1>كل سنة وانتي طيبة يا نينو 🎉</h1>
+    <p class="sub" id="typed"></p>
+    <span class="date">٢٨ أكتوبر</span>
+  </section>
+
+  <section class="cakewrap" id="cake" aria-label="تورتة">
+    <div class="candles"><div class="candle"><i class="flame"></i></div><div class="candle"><i class="flame"></i></div><div class="candle"><i class="flame"></i></div></div>
+    <div class="tier t1"></div><div class="tier t2"></div><div class="plate"></div>
+  </section>
+  <button id="blow">🕯️ طفّي الشمع واتمني أمنية</button>
+  <div id="wishmsg" role="status"></div>
+
+  <h2>كروت ليكي يا نينو</h2>
+  <p class="hint">اضغطي على كل كارت وشوفي فيه إيه</p>
+  <div class="cards" id="cards"></div>
+
+  <div class="letter">
+    <b>يا نينو،</b><br>
+    كل سنة وانتي طيبة وحلوة ومنوّرة الدنيا زي ما انتي. ربنا يخليكي ليّا ومايحرمنيش من ضحكتك ولا من الهزار بتاعنا. أتمنالك سنة تبقي فيها كل أمنياتك حقيقة، وكل حاجة تتمنيها تيجيلك من غير تعب. انتي صحبة بجد، والواحد بيفتخر إن عنده واحدة زيك في حياته.<br>
+    <b>عقبال مليون سنة، وتفضلي دايمًا نينو بتاعتنا 💛</b>
+  </div>
+  <footer>معمول بحب لنينو 🎂</footer>
+</main>
+
+<script>
+(function(){
+var $=function(s){return document.querySelector(s)};
+var lock=$('#lock'),pw=$('#pw'),err=$('#err'),box=$('#box'),main=$('#main'),snd=$('#snd');
+var AC=null,playing=false,timer=null,master=null;
+
+/* balloons */
+var cols=['#ff3d7f','#ffb02e','#2ec4a6','#8e6bff','#ff8fb8'];
+for(var i=0;i<14;i++){var b=document.createElement('i');b.className='b';b.style.cssText='left:'+(Math.random()*96)+'%;background:'+cols[i%5]+';color:'+cols[i%5]+';animation-duration:'+(9+Math.random()*10)+'s;animation-delay:'+(-Math.random()*14)+'s;transform:scale('+(.7+Math.random()*.7)+')';$('#bal').appendChild(b)}
+
+/* password: accepts 28/10 in many shapes, Arabic digits too */
+function norm(s){return s.replace(/[٠-٩]/g,function(d){return '٠١٢٣٤٥٦٧٨٩'.indexOf(d)}).replace(/\D/g,'')}
+function ok(s){var n=norm(s);return n==='2810'||n==='28010'||n==='02810'}
+function tryOpen(){
+  if(!ok(pw.value)){
+    err.textContent=pw.value.trim()?'لأ يا نينو، ركّزي، ده عيد ميلادك انتي 😂':'اكتبي الباس الأول يا قمر';
+    box.classList.remove('shake');void box.offsetWidth;box.classList.add('shake');return}
+  err.textContent='';lock.classList.add('gone');main.hidden=false;snd.style.display='block';
+  startMusic();burst(innerWidth/2,innerHeight/3,140);type();
+  setTimeout(function(){lock.style.display='none'},900);
+}
+$('#go').onclick=tryOpen;
+pw.addEventListener('keydown',function(e){if(e.key==='Enter')tryOpen()});
+
+/* typed subtitle */
+function type(){
+  var t='عيد ميلاد سعيد يا أحلى نينو في الدنيا، ويا رب كل سنة تبقي أحلى من اللي قبلها ✨',el=$('#typed'),i=0;
+  (function n(){el.textContent=t.slice(0,i++);if(i<=t.length)setTimeout(n,45)})();
+}
+
+/* happy birthday on WebAudio */
+var N={G4:392,A4:440,B4:493.88,C5:523.25,D5:587.33,E5:659.25,F5:698.46,G5:783.99};
+var song=[['G4',.75],['G4',.25],['A4',1],['G4',1],['C5',1],['B4',2],
+['G4',.75],['G4',.25],['A4',1],['G4',1],['D5',1],['C5',2],
+['G4',.75],['G4',.25],['G5',1],['E5',1],['C5',1],['B4',1],['A4',2],
+['F5',.75],['F5',.25],['E5',1],['C5',1],['D5',1],['C5',2]];
+var beat=.42;
+function playOnce(){
+  var t=AC.currentTime+.05;
+  song.forEach(function(n){
+    var f=N[n[0]],d=n[1]*beat;
+    [1,2].forEach(function(m,k){
+      var o=AC.createOscillator(),g=AC.createGain();
+      o.type=k?'sine':'triangle';o.frequency.value=f*m;
+      g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(k?.05:.16,t+.02);g.gain.exponentialRampToValueAtTime(.001,t+d*.95);
+      o.connect(g);g.connect(master);o.start(t);o.stop(t+d);
+    });
+    t+=d;
+  });
+  return (t-AC.currentTime)*1000+700;
+}
+function loop(){if(!playing)return;timer=setTimeout(loop,playOnce())}
+function startMusic(){
+  try{
+    AC=AC||new (window.AudioContext||window.webkitAudioContext)();
+    if(AC.state==='suspended')AC.resume();
+    if(!master){master=AC.createGain();master.gain.value=.8;master.connect(AC.destination)}
+    playing=true;snd.textContent='🎵';loop();
+  }catch(e){}
+}
+function stopMusic(){playing=false;clearTimeout(timer);snd.textContent='🔇';if(master){master.disconnect();master=null}}
+snd.onclick=function(){playing?stopMusic():startMusic()};
+
+/* confetti */
+var cv=$('#fx'),cx=cv.getContext('2d'),ps=[];
+function fit(){cv.width=innerWidth*devicePixelRatio;cv.height=innerHeight*devicePixelRatio}
+fit();addEventListener('resize',fit);
+function burst(x,y,n){
+  for(var i=0;i<n;i++){var a=Math.random()*Math.PI*2,s=4+Math.random()*9;
+    ps.push({x:x,y:y,vx:Math.cos(a)*s,vy:Math.sin(a)*s-6,r:4+Math.random()*5,c:cols[i%5],life:120+Math.random()*60,rot:Math.random()*6})}
+  if(ps.length===n)draw();
+}
+function draw(){
+  cx.clearRect(0,0,cv.width,cv.height);var k=devicePixelRatio;
+  ps=ps.filter(function(p){return p.life>0});
+  ps.forEach(function(p){p.vy+=.28;p.vx*=.99;p.x+=p.vx;p.y+=p.vy;p.rot+=.2;p.life--;
+    cx.save();cx.translate(p.x*k,p.y*k);cx.rotate(p.rot);cx.fillStyle=p.c;cx.fillRect(-p.r*k,-p.r*k/2,p.r*2*k,p.r*k);cx.restore()});
+  if(ps.length)requestAnimationFrame(draw);else cx.clearRect(0,0,cv.width,cv.height);
+}
+addEventListener('pointerdown',function(e){if(lock.style.display==='none')burst(e.clientX,e.clientY,30)});
+
+/* candles */
+var wishes=['ربنا يحققلك كل اللي في قلبك يا نينو 🤲','أمنيتك اتسجلت، والكون سمع! ✨','أكيد اتمنيتي تاكلي التورتة كلها، بس هنقسمها 😂','يا رب السنة دي تبقى أحلى سنة في عمرك 💛'];
+$('#blow').onclick=function(){
+  var c=$('#cake'),out=c.classList.toggle('out');
+  if(out){var r=c.getBoundingClientRect();burst(r.left+r.width/2,r.top,110);
+    $('#wishmsg').textContent=wishes[Math.floor(Math.random()*wishes.length)];this.textContent='🔥 ولّعي الشمع تاني'}
+  else{$('#wishmsg').textContent='';this.textContent='🕯️ طفّي الشمع واتمني أمنية'}
+};
+
+/* cards */
+var msgs=['انتي صحبتي اللي الدنيا حلوة بيها 💛','إنتي أحلى نينو في الدنيا، وده مش رأيي لوحدي ده إجماع 😂','سنة جديدة، فرحة جديدة، وهمّ أقل إن شاء الله 🌸','عقبال ما تحققي كل اللي في دماغك وأكتر 🚀','ضحكتك لوحدها تعمل يوم حلو، متبطليش تضحكي أبدًا 😄','اطلبي اللي انتي عايزاه النهاردة، النهاردة يومك والكلمة كلمتك 👑'];
+var ic=['🎁','🎈','🍰','🌟','💌','🎀'];
+msgs.forEach(function(m,i){
+  var d=document.createElement('button');d.className='card';
+  d.innerHTML='<div class="in"><div class="f">'+ic[i]+'</div><div class="k"></div></div>';
+  d.querySelector('.k').textContent=m;
+  d.onclick=function(e){var o=d.classList.toggle('open');if(o){var r=d.getBoundingClientRect();burst(r.left+r.width/2,r.top+40,25)}e.stopPropagation()};
+  $('#cards').appendChild(d);
+});
+})();
+</script>
+</body>
+</html>
